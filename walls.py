@@ -1,7 +1,11 @@
-import requests
-from bs4 import BeautifulSoup as bs
 import os
-from clint.textui import progress
+try:
+	import requests
+	from bs4 import BeautifulSoup as bs
+	from clint.textui import progress
+except ModuleNotFoundError:
+	print("[NOTE] Some dependencies were not found on your system. Installing them automatically.")
+	os.system('python -m pip install requests bs4 clint')
 
 ids = []
 pages = []
@@ -67,5 +71,12 @@ def get_id(term):
 	download(urls)
 
 if __name__ == '__main__':
-	term = input('Enter the search term : ')
+	print(r'''
+  _      __     ____                         ___                  __             __       
+ | | /| / /__ _/ / /__  ___ ____  ___ ____  / _ \___ _    _____  / /__  ___ ____/ /__ ____
+ | |/ |/ / _ `/ / / _ \/ _ `/ _ \/ -_) __/ / // / _ \ |/|/ / _ \/ / _ \/ _ `/ _  / -_) __/
+ |__/|__/\_,_/_/_/ .__/\_,_/ .__/\__/_/   /____/\___/__,__/_//_/_/\___/\_,_/\_,_/\__/_/   
+                /_/       /_/                                                             
+																	- By /u/SharmaDeepesh''')
+	term = input('\n\nEnter the search term : ')
 	get_id(term)
